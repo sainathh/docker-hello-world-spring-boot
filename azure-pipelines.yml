@@ -27,7 +27,20 @@ steps:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/TEST-*.xml'
 
-- task: Docker@2
+- task: DockerInstaller@0
   inputs:
-    command: 'build'
-    Dockerfile: '**/Dockerfile'
+    dockerVersion: '17.09.0-ce'
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      docker build -t sai-spring-boot .
+      docker tag sai-spring-boot:latest 872154951115.dkr.ecr.us-east-1.amazonaws.com/sai-spring-boot:latest
+
+- task: ECRPushImage@1
+  inputs:
+    awsCredentials: 'sai.p-aws'
+    regionName: 'us-east-1'
+    imageSource: 'imagename'
+    sourceImageName: '872154951115.dkr.ecr.us-east-1.amazonaws.com/sai-spring-boot'
+    repositoryName: '872154951115.dkr.ecr.us-east-1.amazonaws.com/sai-spring-boot'
