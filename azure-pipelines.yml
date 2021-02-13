@@ -43,4 +43,4 @@ steps:
     regionName: 'us-east-1'
     imageSource: 'imagename'
     sourceImageName: '872154951115.dkr.ecr.us-east-1.amazonaws.com/sai-spring-boot'
-    repositoryName: '872154951115.dkr.ecr.us-east-1.amazonaws.com/sai-spring-boot'
+    repositoryName: 'sai-spring-boot'
